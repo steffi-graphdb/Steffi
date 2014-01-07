@@ -1,0 +1,187 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.imgraph.tests</groupId>
+  <artifactId>titan</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>titan</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+  	
+            
+  	<dependency>
+   		<groupId>com.thinkaurelius.titan</groupId>
+   		<artifactId>titan-core</artifactId>
+   		<version>0.3.0</version>
+	</dependency>
+	
+	<dependency>
+   		<groupId>com.thinkaurelius.titan</groupId>
+   		<artifactId>titan-cassandra</artifactId>
+   		<version>0.3.0</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>org.yaml</groupId>
+    	<artifactId>snakeyaml</artifactId>
+    	<version>1.13-SNAPSHOT</version>
+  	</dependency>
+  	
+  	<dependency>
+	  <groupId>com.typesafe.akka</groupId>
+	  <artifactId>akka-actor_2.10</artifactId>
+	  <version>2.1.0</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.typesafe.akka</groupId>
+		<artifactId>akka-kernel_2.10</artifactId>
+		<version>2.1.0</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.typesafe.akka</groupId>
+		<artifactId>akka-remote_2.10</artifactId>
+		<version>2.1.0</version>
+	</dependency>
+            
+            
+  
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+  		<plugins>
+  		
+  			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.0-beta-1</version>
+				<executions>
+					<execution>
+						<id>enforce-java</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireJavaVersion>
+									<version>[1.6,)</version>
+								</requireJavaVersion>
+								<requireMavenVersion>
+									<version>[2.1.0,)</version>
+								</requireMavenVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- by default, compile to JDK 1.6 compatibility -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+  		
+  		
+  		
+  <!-- 
+  				<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>neo4j.tests.TestManager</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.dstovall</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.4.4</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <onejarVersion>0.97</onejarVersion>
+                            <attachToBuild>true</attachToBuild>
+                            <classifier>onejar</classifier>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+-->
+
+		
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.imgraph.tests.titan.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								${project.build.directory}/lib
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+  		</plugins>
+  	</build>
+  	
+  	<repositories>
+  
+	  <repository>
+	    <id>Sonatype-public</id>
+	    <name>SnakeYAML repository</name>
+	    <url>http://oss.sonatype.org/content/groups/public/</url>
+	  </repository>
+  
+	</repositories>
+  
+</project>

@@ -1,0 +1,25 @@
+//Script to test the indexes created on the simpleTest.groovy file
+i = g.getIndex("vIndex", ImgraphVertex)
+j = g.getIndex("eIndex", ImgraphEdge)
+
+print "Vertices having weight=40"
+for (ImgraphVertex iv : i.get("weight", 40))
+	println(iv);
+
+print "Vertices having weight=10"
+for (ImgraphVertex iv : i.get("weight", 10))
+        println(iv);
+
+print "Vertices having age=6"
+for (ImgraphVertex iv : i.get("age", 6))
+        println(iv);
+
+print "Edges having degree=High"
+for (ImgraphEdge ie : j.get("degree", "High"))
+        println(ie);
+
+print "Edges having degree=Low"
+for (ImgraphEdge ie : j.get("degree", "Low"))
+        println(ie);
+
+

@@ -1,0 +1,70 @@
+An example of the config.properties file referenced in this document can be found on the msc folder
+
+I. Starting and stopping an Imgraph data server
+===============================================
+To start a data server, execute the following command on the target directory of the imgraph-core maven project
+	java -jar imgraph-core-0.0.1-SNAPSHOT.jar START_NODE config.properties
+where config.properties is a valid configuration file for Imgraph
+
+Optionally you could start a data server with the basic console, to do this execute the following command: 
+	java -jar imgraph-core-0.0.1-SNAPSHOT.jar START_CONSOLE config.properties
+	
+To stop the server, from the same directory used to start the server execute the followin command
+	java -jar imgraph-core-0.0.1-SNAPSHOT.jar STOP_NODE
+	
+II. Starting ans stopping of an Imgraph traversal manager server
+====================================================
+To start a data server, execute the following command on the target directory of the imgraph-core maven project
+	java -jar imgraph-core-0.0.1-SNAPSHOT.jar START_MANAGER config.properties
+where config.properties is a valid configuration file for Imgraph
+
+To stop the server, from the same directory used to start the server execute the followin command
+	java -jar imgraph-core-0.0.1-SNAPSHOT.jar STOP_MANAGER
+	
+III. Starting of the Gremlin console
+====================================
+From the main Gremlin directory execute the follwing command
+	./bin/gremlin.sh
+
+Then, the Gremlin console will be started. Before executing the Gremlin commands or scripts you have to start the Imgraph 
+data server inside the Gremlin console by executing the following command:
+	ImgraphFactory.startImgraphEngine()
+
+This will start the Infinispan Cache and the ZeroMQ server. Then, when the other data servers of the cluster have been completely initialized, execute
+the following command to configure the cluster
+	ImgraphFactory.configureCluster()
+
+Finally to obtain a reference to the object implementing the Blueprints interface Graph, execute the following command:
+	g = ImgraphGraph.getInstance()
+
+Then, you can use g to execute the Gremlin commands that you want, more documentation about Gremlin commands can be found on 
+https://github.com/tinkerpop/gremlin/wiki
+
+If you want to exit the Gremlin console you must shutdown first the Imgraph data server using the following command:
+	ImgraphFactory.stopImgraphEngine()
+
+
+IV. Starting and stopping the Rexster server
+==================================
+From the Rexster main directory execute the following commands:
+
+	cd rexster-server/target/rexster-server-2.5.0-SNAPSHOT-standalone
+	./bin/rexster.sh --start
+
+This will start the Rexster server on the local machine, during the startup the an Imgraph data server will be started automatically; however,
+the cluster will not be configured automatically so it's advisable to do it using the following command:
+	com.tinkerpop.blueprints.impls.imgraph.ImgraphFactory.configureCluster()
+
+You can notice in the previous command that the ImgraphFactory class was specified including the complete package name. When you're using Rexster, any class
+does not belong to the standarad Blueprints interfaces must be specified with its complete name. This applies for example for the ImgraphFactory, ImgraphBAtchLoader
+or ImgraphTraversal clasess (all belong to the package com.tinkerpop.blueprints.impls.imgraph)
+
+Then, you can interact with the Rexster server through the rexster-console, REST API or the Dog House Web interface. For more information, 
+check the documentation at https://github.com/tinkerpop/rexster/wiki.
+
+As with the Gremlin console before stopping the Rexster server you must execute the Gremlin command:
+	com.tinkerpop.blueprints.impls.imgraph.ImgraphFactory.startImgraphEngine()
+
+Then to stop the server, from the same directory used to start the server execute the following command:
+	./bin/rexster.sh --stop
+
