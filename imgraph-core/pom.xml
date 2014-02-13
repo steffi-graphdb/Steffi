@@ -14,7 +14,7 @@
 	<properties>
 		<version.infinispan>5.2.0.Final</version.infinispan>
 		
-		<jzmq.version>2.2.3-SNAPSHOT</jzmq.version>
+		<jzmq.version>4.0.0-SNAPSHOT</jzmq.version>
 		<native.os>${os.name}</native.os>
 	</properties>
 
@@ -42,12 +42,6 @@
 			<version>2.1.0</version>
 		</dependency>
 		
-		<dependency>
-      		<groupId>trove</groupId>
-      		<artifactId>trove</artifactId>
-      		<version>3.0.3</version>
-    	</dependency>
-    	 
     	<dependency>
 			<groupId>com.typesafe.akka</groupId>
 			<artifactId>akka-actor_2.10</artifactId>
@@ -71,18 +65,22 @@
 		     
 		<dependency>
 			<groupId>org.zeromq</groupId>
-			<artifactId>jzmq</artifactId>
+			<artifactId>jzmq4</artifactId>
 			<version>${jzmq.version}</version>
-		</dependency>
+		</dependency>  
 		
 		
 		<dependency>
 			<groupId>org.zeromq</groupId>
-			<artifactId>jzmq-native</artifactId>
+			<artifactId>jzmq4-native</artifactId>
 			<version>${jzmq.version}</version>
+		</dependency> 
+		
+		<dependency>
+			<groupId>net.sf.trove4j</groupId>
+			<artifactId>trove4j</artifactId>
+			<version>3.0.3</version>
 		</dependency>
-		
-		
 	
       <dependency> 
 	  	<groupId>org.slf4j</groupId>
@@ -134,7 +132,7 @@
 			
 			
 			 <!-- This configuration could be used to generate a single JAR containing all the external libraries, 
-			 	however ZeroMQ native libraries must be installed anyway 
+			 	however ZeroMQ native libraries must be installed anyway -->
 			  
 		    <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -165,7 +163,7 @@
                 </executions>
             </plugin>
         
-			-->
+			
 			
 			
  			<plugin>
@@ -203,8 +201,14 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-surefire-plugin</artifactId>
+        		<configuration>
+        			<argLine>-Djava.library.path=/usr/local/lib</argLine>
+    			</configuration>
+      		</plugin>
 		</plugins>
 	</build>
 	
