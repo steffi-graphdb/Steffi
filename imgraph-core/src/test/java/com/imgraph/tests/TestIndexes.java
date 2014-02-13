@@ -20,13 +20,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.imgraph.index.ImgIndex;
-import com.imgraph.index.ImgIndexHits;
-import com.imgraph.model.Cell;
-import com.imgraph.model.EdgeType;
-import com.imgraph.model.ImgEdge;
-import com.imgraph.model.ImgGraph;
-import com.imgraph.model.ImgVertex;
+import com.steffi.index.ImgIndex;
+import com.steffi.index.ImgIndexHits;
+import com.steffi.model.Cell;
+import com.steffi.model.EdgeType;
+import com.steffi.model.SteffiEdge;
+import com.steffi.model.SteffiGraph;
+import com.steffi.model.SteffiVertex;
 
 
 
@@ -63,8 +63,8 @@ public class TestIndexes extends BaseLocalTest {
 	public void testIndexCreation() {
 		
 		
-		assertNotNull(graph.getIndex("vIndex", ImgVertex.class));
-		assertNotNull(graph.getIndex("eIndex", ImgEdge.class));
+		assertNotNull(graph.getIndex("vIndex", SteffiVertex.class));
+		assertNotNull(graph.getIndex("eIndex", SteffiEdge.class));
 	}
 	
 	private <T extends Cell> void indexProperties(T cell, ImgIndex<T> index) {
@@ -73,13 +73,13 @@ public class TestIndexes extends BaseLocalTest {
 	}
 	
 	private void putKeyValues() {
-		ImgIndex<ImgVertex> vertexIndex = graph.getIndex("vIndex", ImgVertex.class);
-		ImgIndex<ImgEdge> edgeIndex = graph.getIndex("eIndex", ImgEdge.class);
+		ImgIndex<SteffiVertex> vertexIndex = graph.getIndex("vIndex", SteffiVertex.class);
+		ImgIndex<SteffiEdge> edgeIndex = graph.getIndex("eIndex", SteffiEdge.class);
 		
 		graph.startTransaction();
-		ImgVertex v100 = graph.getVertex(100);
-		ImgVertex v101 = graph.getVertex(101);
-		ImgVertex v1 = graph.addVertex(1L, null);
+		SteffiVertex v100 = graph.getVertex(100);
+		SteffiVertex v101 = graph.getVertex(101);
+		SteffiVertex v1 = graph.addVertex(1L, null);
 		v1.putAttribute("name", "Paul");
 		v1.putAttribute("weight", 50);
 		
@@ -87,10 +87,10 @@ public class TestIndexes extends BaseLocalTest {
 		indexProperties(v101, vertexIndex);
 		indexProperties(v1, vertexIndex);
 		
-		for (ImgEdge edge : v100.getEdges())
+		for (SteffiEdge edge : v100.getEdges())
 			indexProperties(edge, edgeIndex);
 		
-		for (ImgEdge edge : v101.getEdges())
+		for (SteffiEdge edge : v101.getEdges())
 			indexProperties(edge, edgeIndex);
 		
 		graph.commit();
@@ -100,12 +100,12 @@ public class TestIndexes extends BaseLocalTest {
 	public void testIndexRollback() {
 		putKeyValues();
 		
-		ImgIndex<ImgVertex> vertexIndex = graph.getIndex("vIndex", ImgVertex.class);
-		ImgIndex<ImgEdge> edgeIndex = graph.getIndex("eIndex", ImgEdge.class);
+		ImgIndex<SteffiVertex> vertexIndex = graph.getIndex("vIndex", SteffiVertex.class);
+		ImgIndex<SteffiEdge> edgeIndex = graph.getIndex("eIndex", SteffiEdge.class);
 		
 		graph.startTransaction();
-		ImgVertex v103 = graph.getVertex(103);
-		ImgVertex v104 = graph.getVertex(104);
+		SteffiVertex v103 = graph.getVertex(103);
+		SteffiVertex v104 = graph.getVertex(104);
 		indexProperties(v103, vertexIndex);
 		indexProperties(v104, vertexIndex);
 		
@@ -115,7 +115,7 @@ public class TestIndexes extends BaseLocalTest {
 		
 		graph.rollback();
 		
-		ImgIndexHits<ImgVertex> vertexHits = vertexIndex.get("name", "Jane");
+		ImgIndexHits<SteffiVertex> vertexHits = vertexIndex.get("name", "Jane");
 		assertFalse(vertexHits.hasNext());
 		vertexHits = vertexIndex.get("weight", 49);
 		assertFalse(vertexHits.hasNext());
@@ -124,9 +124,9 @@ public class TestIndexes extends BaseLocalTest {
 		vertexHits = vertexIndex.get("wwight", 98);
 		assertFalse(vertexHits.hasNext());
 		
-		ImgIndexHits<ImgEdge> edgeHits = edgeIndex.get("stars", 3);
+		ImgIndexHits<SteffiEdge> edgeHits = edgeIndex.get("stars", 3);
 		int counter=0;
-		for (ImgEdge edge: edgeHits) {
+		for (SteffiEdge edge: edgeHits) {
 			assertTrue(isEdgeWith(edge, EdgeType.OUT, "recommends", 103, 100) ||
 					isEdgeWith(edge, EdgeType.OUT, "recommends", 102, 101));
 			counter++;
@@ -142,12 +142,12 @@ public class TestIndexes extends BaseLocalTest {
 	public void testRemoveKeyValue() {
 		putKeyValues();
 		
-		ImgIndex<ImgVertex> vertexIndex = graph.getIndex("vIndex", ImgVertex.class);
-		ImgIndex<ImgEdge> edgeIndex = graph.getIndex("eIndex", ImgEdge.class);
+		ImgIndex<SteffiVertex> vertexIndex = graph.getIndex("vIndex", SteffiVertex.class);
+		ImgIndex<SteffiEdge> edgeIndex = graph.getIndex("eIndex", SteffiEdge.class);
 		
 		graph.startTransaction();
-		ImgVertex v100 = graph.getVertex(100);
-		ImgVertex v101 = graph.getVertex(101);
+		SteffiVertex v100 = graph.getVertex(100);
+		SteffiVertex v101 = graph.getVertex(101);
 		
 		vertexIndex.remove(v100, "name", "John");
 		vertexIndex.remove(v101, "weight", 50);
@@ -157,17 +157,17 @@ public class TestIndexes extends BaseLocalTest {
 		
 		graph.commit();
 		
-		vertexIndex = graph.getIndex("vIndex", ImgVertex.class);
-		edgeIndex = graph.getIndex("eIndex", ImgEdge.class);
+		vertexIndex = graph.getIndex("vIndex", SteffiVertex.class);
+		edgeIndex = graph.getIndex("eIndex", SteffiEdge.class);
 		
-		ImgIndexHits<ImgVertex> vertexHits = vertexIndex.get("name", "John");
+		ImgIndexHits<SteffiVertex> vertexHits = vertexIndex.get("name", "John");
 		assertFalse(vertexHits.hasNext());
 		
 		vertexHits = vertexIndex.get("weight", 50);
 		assertEquals(1, vertexHits.next().getId());
 		assertFalse(vertexHits.hasNext());
 		
-		ImgIndexHits<ImgEdge> edgeHits= edgeIndex.get("stars", 3);
+		ImgIndexHits<SteffiEdge> edgeHits= edgeIndex.get("stars", 3);
 		assertFalse(edgeHits.hasNext());
 		
 		
@@ -178,11 +178,11 @@ public class TestIndexes extends BaseLocalTest {
 	public void testPutKeyValue() {
 		putKeyValues();
 		
-		ImgIndex<ImgVertex> vertexIndex = graph.getIndex("vIndex", ImgVertex.class);
-		ImgIndex<ImgEdge> edgeIndex = graph.getIndex("eIndex", ImgEdge.class);
+		ImgIndex<SteffiVertex> vertexIndex = graph.getIndex("vIndex", SteffiVertex.class);
+		ImgIndex<SteffiEdge> edgeIndex = graph.getIndex("eIndex", SteffiEdge.class);
 		
 		
-		ImgIndexHits<ImgVertex> indexHits = vertexIndex.get("name", "John");
+		ImgIndexHits<SteffiVertex> indexHits = vertexIndex.get("name", "John");
 		assertEquals(100, indexHits.next().getId());
 		assertFalse(indexHits.hasNext());
 		
@@ -200,19 +200,19 @@ public class TestIndexes extends BaseLocalTest {
 		
 		Set<Long> vertexIds = new HashSet<Long>();
 		indexHits = vertexIndex.get("weight", 50);
-		for (ImgVertex vertex : indexHits)
+		for (SteffiVertex vertex : indexHits)
 			vertexIds.add(vertex.getId());
 		assertTrue(vertexIds.contains(1L));
 		assertTrue(vertexIds.contains(101L));
 		assertEquals(2, vertexIds.size());
 		
-		ImgIndexHits<ImgEdge> edgeIndexHits = edgeIndex.get("stars", 5);
+		ImgIndexHits<SteffiEdge> edgeIndexHits = edgeIndex.get("stars", 5);
 		assertTrue(isEdgeWith(edgeIndexHits.next(), EdgeType.OUT, "recommends", 104, 100));
 		assertFalse(indexHits.hasNext());
 		
 		edgeIndexHits = edgeIndex.get("stars", 3);
 		int counter=0;
-		for (ImgEdge edge: edgeIndexHits) {
+		for (SteffiEdge edge: edgeIndexHits) {
 			assertTrue(isEdgeWith(edge, EdgeType.OUT, "recommends", 103, 100) ||
 					isEdgeWith(edge, EdgeType.OUT, "recommends", 102, 101));
 			counter++;

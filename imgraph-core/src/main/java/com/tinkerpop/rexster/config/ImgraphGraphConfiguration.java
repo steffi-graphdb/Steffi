@@ -14,10 +14,10 @@ package com.tinkerpop.rexster.config;
 import org.apache.commons.configuration.Configuration;
 import org.infinispan.lifecycle.ComponentStatus;
 
-import com.imgraph.networking.NodeServer;
-import com.imgraph.storage.CacheContainer;
+import com.steffi.networking.NodeServer;
+import com.steffi.storage.CacheContainer;
 import com.tinkerpop.blueprints.Graph;
-import com.tinkerpop.blueprints.impls.imgraph.ImgraphGraph;
+import com.tinkerpop.blueprints.impls.steffi.SteffiGraphDBGraph;
 
 /**
  * @author Aldemar Reynaga
@@ -35,7 +35,7 @@ public class ImgraphGraphConfiguration implements GraphConfiguration {
 			System.setProperty("java.net.preferIPv4Stack" , "true");
 		
 			if (configFile != null)
-				com.imgraph.common.Configuration.loadProperties(configFile);
+				com.steffi.common.Configuration.loadProperties(configFile);
 			
 			CacheContainer.getCacheContainer().start();
 			CacheContainer.getCellCache().start();
@@ -52,7 +52,7 @@ public class ImgraphGraphConfiguration implements GraphConfiguration {
 		}
 		
 		
-		return ImgraphGraph.getInstance();
+		return SteffiGraphDBGraph.getInstance();
 	}
 
 }

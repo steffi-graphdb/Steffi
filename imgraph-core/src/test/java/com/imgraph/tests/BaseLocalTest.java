@@ -22,15 +22,15 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
-import com.imgraph.Main;
-import com.imgraph.common.Configuration;
-import com.imgraph.model.Cell;
-import com.imgraph.model.EdgeType;
-import com.imgraph.model.ImgEdge;
-import com.imgraph.model.ImgGraph;
-import com.imgraph.model.ImgVertex;
-import com.imgraph.networking.NodeServer;
-import com.imgraph.storage.CacheContainer;
+import com.steffi.Main;
+import com.steffi.common.Configuration;
+import com.steffi.model.Cell;
+import com.steffi.model.EdgeType;
+import com.steffi.model.SteffiEdge;
+import com.steffi.model.SteffiGraph;
+import com.steffi.model.SteffiVertex;
+import com.steffi.networking.NodeServer;
+import com.steffi.storage.CacheContainer;
 
 
 /**
@@ -39,7 +39,7 @@ import com.imgraph.storage.CacheContainer;
  */
 public class BaseLocalTest {
 	
-	protected ImgGraph graph = ImgGraph.getInstance();
+	protected SteffiGraph graph = SteffiGraph.getInstance();
 	
 	@BeforeClass
 	public static void imgraphSetup() throws Exception {
@@ -61,11 +61,11 @@ public class BaseLocalTest {
 	
 	@After
 	public void graphTearDown() {
-		ImgGraph.getInstance().removeAll();
+		SteffiGraph.getInstance().removeAll();
 	}
 	
 	private void createTestGraph() {
-		ImgGraph graph = ImgGraph.getInstance();
+		SteffiGraph graph = SteffiGraph.getInstance();
 		
 		graph.startTransaction();
 		
@@ -76,11 +76,11 @@ public class BaseLocalTest {
 		graph.registerItemName("weight");
 		
 		
-		ImgVertex v100 = graph.addVertex(100L, null);
-		ImgVertex v101 = graph.addVertex(101L, null);
-		ImgVertex v102 = graph.addVertex(102L, null);
-		ImgVertex v103 = graph.addVertex(103L, null);
-		ImgVertex v104 = graph.addVertex(104L, null);
+		SteffiVertex v100 = graph.addVertex(100L, null);
+		SteffiVertex v101 = graph.addVertex(101L, null);
+		SteffiVertex v102 = graph.addVertex(102L, null);
+		SteffiVertex v103 = graph.addVertex(103L, null);
+		SteffiVertex v104 = graph.addVertex(104L, null);
 		
 		v100.putAttribute("name", "John");
 		v101.putAttribute("name", "Mary");
@@ -94,27 +94,27 @@ public class BaseLocalTest {
 		v103.putAttribute("weight", 49);
 		v104.putAttribute("weight", 98);
 		
-		ImgEdge e100_103 = v100.addEdge(v103, true, "recommends");
+		SteffiEdge e100_103 = v100.addEdge(v103, true, "recommends");
 		e100_103.putAttribute("stars", 3);
 		
 		v100.addEdge(v102, false, "classmate");
 		
-		ImgEdge e100_104 = v100.addEdge(v104, true, "recommends");
+		SteffiEdge e100_104 = v100.addEdge(v104, true, "recommends");
 		e100_104.putAttribute("stars", 5);
 		
 		v103.addEdge(v101, false, "classmate");
 		
-		ImgEdge e101_102 = v101.addEdge(v102, true, "recommends");
+		SteffiEdge e101_102 = v101.addEdge(v102, true, "recommends");
 		e101_102.putAttribute("stars", 3);
 		
-		ImgEdge e104_101 = v104.addEdge(v101, true, "recommends");
+		SteffiEdge e104_101 = v104.addEdge(v101, true, "recommends");
 		e104_101.putAttribute("stars", 4);
 		
 		graph.commit();
 		
 	}
 	
-	protected boolean isEdgeWith(ImgEdge edge, EdgeType edgeType, String name, long destId, long sourceId) {
+	protected boolean isEdgeWith(SteffiEdge edge, EdgeType edgeType, String name, long destId, long sourceId) {
 		return (edge.getName().equals(name) && edge.getEdgeType().equals(edgeType) &&
 				edge.getDestCellId() == destId && edge.getSourceCellId() == sourceId);
 	}

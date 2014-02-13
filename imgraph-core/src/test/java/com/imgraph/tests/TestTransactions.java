@@ -13,16 +13,16 @@ package com.imgraph.tests;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import static org.junit.Assert.*;
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.imgraph.model.EdgeType;
-import com.imgraph.model.ImgEdge;
-
-import com.imgraph.model.ImgVertex;
-import com.imgraph.storage.TransactionRequiredException;
+import com.steffi.model.EdgeType;
+import com.steffi.model.SteffiEdge;
+import com.steffi.model.SteffiVertex;
+import com.steffi.storage.TransactionRequiredException;
 
 /**
  * @author Aldemar Reynaga
@@ -41,8 +41,8 @@ public class TestTransactions extends BaseLocalTest{
 	@Test
 	public void testAtomicity() {
 		graph.startTransaction();
-		ImgVertex v1 = graph.addVertex(1L, null);
-		ImgVertex v103 = graph.getVertex(103);
+		SteffiVertex v1 = graph.addVertex(1L, null);
+		SteffiVertex v103 = graph.getVertex(103);
 		
 		v1.addEdge(v103, false, "classmate");
 		v103.putAttribute("weight", 75); 
@@ -50,7 +50,7 @@ public class TestTransactions extends BaseLocalTest{
 		graph.rollback();
 		
 		assertNull(graph.getVertex(1));
-		ImgVertex rv103 = graph.getVertex(103);
+		SteffiVertex rv103 = graph.getVertex(103);
 		assertNull(rv103.getEdge(1, EdgeType.UNDIRECTED, "classmate"));
 		assertEquals(49, rv103.getAttribute("weight"));
 		
@@ -77,9 +77,9 @@ public class TestTransactions extends BaseLocalTest{
 			throw new RuntimeException(ex);
 		}
 		
-		ImgVertex rv100 = graph.getVertex(100);
+		SteffiVertex rv100 = graph.getVertex(100);
 		
-		for (ImgEdge edge : rv100.getEdges()) {
+		for (SteffiEdge edge : rv100.getEdges()) {
 			if (!isEdgeWith(edge, EdgeType.OUT, "recommends", 103, 100) && 
 					!isEdgeWith(edge, EdgeType.OUT, "recommends", 104, 100) &&
 					!isEdgeWith(edge, EdgeType.UNDIRECTED, "classmate", 102, 100))
@@ -87,7 +87,7 @@ public class TestTransactions extends BaseLocalTest{
 		}
 		assertEquals(68, rv100.getAttribute("weight"));
 		
-		ImgVertex rv104 = graph.getVertex(104);
+		SteffiVertex rv104 = graph.getVertex(104);
 		
 		rv104.addEdge(graph.getVertex(102), false, "classmate");
 		
@@ -99,7 +99,7 @@ public class TestTransactions extends BaseLocalTest{
 		assertNotNull(rv100.getEdge(103, EdgeType.OUT, "recommends"));
 		assertNotNull(rv100.getEdge(104, EdgeType.OUT, "recommends"));
 		assertNotNull(rv100.getEdge(102, EdgeType.UNDIRECTED, "classmate"));
-		ImgEdge e100_1 = rv100.getEdge(1, EdgeType.OUT, "recommends");
+		SteffiEdge e100_1 = rv100.getEdge(1, EdgeType.OUT, "recommends");
 		                 
 		assertNotNull(e100_1);
 		assertEquals(2, e100_1.getAttribute("stars"));
@@ -114,12 +114,12 @@ public class TestTransactions extends BaseLocalTest{
 	@Test
 	public void testNoDirtyReads() {
 		graph.startTransaction();
-		ImgVertex v1 = graph.addVertex(1L, null);
-		ImgVertex v100 = graph.getVertex(100);
-		ImgVertex v102 = graph.getVertex(102);
+		SteffiVertex v1 = graph.addVertex(1L, null);
+		SteffiVertex v100 = graph.getVertex(100);
+		SteffiVertex v102 = graph.getVertex(102);
 		
 		v1.addEdge(v100, false, "classmate");
-		ImgEdge e102_1 = v102.addEdge(v1, true, "recommends");
+		SteffiEdge e102_1 = v102.addEdge(v1, true, "recommends");
 		e102_1.putAttribute("stars", 5);
 		v100.putAttribute("name", "Max");
 		v102.removeAttribute("weight");
@@ -156,11 +156,11 @@ public class TestTransactions extends BaseLocalTest{
 	}
 	
 	
-	private void testIsolationChangesApplied(ImgVertex v1, ImgVertex v100, ImgVertex v102) {
+	private void testIsolationChangesApplied(SteffiVertex v1, SteffiVertex v100, SteffiVertex v102) {
 		
 		Assert.assertNotNull(v1);
 		
-		for (ImgEdge edge : v1.getEdges()) {
+		for (SteffiEdge edge : v1.getEdges()) {
 			if (isEdgeWith(edge, EdgeType.UNDIRECTED, "classmate", 100, 1)) {
 				
 			} else if (isEdgeWith(edge, EdgeType.IN, "recommends", 102, 1)) {
@@ -198,8 +198,8 @@ public class TestTransactions extends BaseLocalTest{
 
 			
 			Assert.assertNull(graph.getVertex(1));
-			ImgVertex v100 = graph.getVertex(100);
-			ImgVertex v102 = graph.getVertex(102);
+			SteffiVertex v100 = graph.getVertex(100);
+			SteffiVertex v102 = graph.getVertex(102);
 			
 			Assert.assertNull(v100.getEdge(1, EdgeType.UNDIRECTED, "classmate"));
 			Assert.assertNull(v102.getEdge(1, EdgeType.OUT, "recommends"));
@@ -241,9 +241,9 @@ public class TestTransactions extends BaseLocalTest{
 
 			graph.startTransaction();
 			
-			ImgVertex v1 = graph.addVertex(1L, null);
-			ImgVertex v100 = graph.getVertex(100);
-			ImgEdge e = v100.addEdge(v1, true, "recommends");
+			SteffiVertex v1 = graph.addVertex(1L, null);
+			SteffiVertex v100 = graph.getVertex(100);
+			SteffiEdge e = v100.addEdge(v1, true, "recommends");
 			e.putAttribute("stars", 2);
 			v100.putAttribute("weight", 100);
 			
