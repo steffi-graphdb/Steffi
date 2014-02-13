@@ -30,7 +30,7 @@ import com.steffi.testing.TestManager;
 
 /**
  * @author Aldemar Reynaga
- * Starting point of the Imgraph class when executed from the JAR file
+ * Starting point of the Steffi class when executed from the JAR file
  */
 public class Main {
 	

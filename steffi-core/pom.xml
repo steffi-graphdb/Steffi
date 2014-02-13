@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.imgraph</groupId>
-	<artifactId>imgraph-core</artifactId>
+	<groupId>com.steffi</groupId>
+	<artifactId>steffi-core</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ImGraph core using Infinispan</name>
-	<url>http://www.myorganization.org</url>
+	<name>Steffi core using Infinispan</name>
+	<url>http://www.steffi.io</url>
 
 
 
@@ -140,7 +140,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.imgraph.Main</mainClass>
+                            <mainClass>com.steffi.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -174,7 +174,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.imgraph.Main</mainClass>
+							<mainClass>com.steffi.Main</mainClass>
 	
 
 						</manifest>
@@ -265,7 +265,7 @@
 							</execution>
 						</executions>
 						<configuration>
-							<mainClass>com.imgraph.storage.CellStorageManager</mainClass>
+							<mainClass>com.steffi.storage.CellStorageManager</mainClass>
 						</configuration>
 					</plugin>
 				</plugins>

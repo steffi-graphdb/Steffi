@@ -35,11 +35,11 @@ public class SteffiGraphDBFactory {
 		CacheContainer.getCacheContainer().stop();
 	}
 	
-	public static void startImgraphEngine() throws Exception {
-		startImgraphEngine(null);
+	public static void startSteffiGraphDBEngine() throws Exception {
+		startSteffiGraphDBEngine(null);
 	}
 	
-	public static void startImgraphEngine(String configFile) throws Exception {
+	public static void startSteffiGraphDBEngine(String configFile) throws Exception {
 		
 		if (configFile != null)
 			Configuration.loadProperties(configFile);
@@ -50,7 +50,7 @@ public class SteffiGraphDBFactory {
 		System.out.println("Imgraph engine started");
 	}
 	
-	public static void stopImgraphEngine() {
+	public static void stopSteffiGraphDBEngine() {
 		Main.sendStopMessage(Configuration.getProperty(Configuration.Key.NODE_PORT));
 		System.out.println("Imgraph engine stopped");
 	}
