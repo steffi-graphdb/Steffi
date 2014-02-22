@@ -1,0 +1,9 @@
+language: java
+before_install:
+install: mvn clean install
+jdk:
+  - oraclejdk7
+  - openjdk7
+notifications:
+  email:
+    - atsaltas@gmail.com
