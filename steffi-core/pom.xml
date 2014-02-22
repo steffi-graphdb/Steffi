@@ -42,7 +42,7 @@
 			<version>2.1.0</version>
 		</dependency>
 		
-    	<dependency>
+    	        <dependency>
 			<groupId>com.typesafe.akka</groupId>
 			<artifactId>akka-actor_2.10</artifactId>
 			<version>2.1.0</version>
@@ -82,11 +82,11 @@
 			<version>3.0.3</version>
 		</dependency>
 	
-      <dependency> 
-	  	<groupId>org.slf4j</groupId>
-	  	<artifactId>slf4j-log4j12</artifactId>
-	  	<version>1.7.2</version>
-	  </dependency>
+                <dependency> 
+	  	        <groupId>org.slf4j</groupId>
+	  	        <artifactId>slf4j-log4j12</artifactId>
+	  	        <version>1.7.2</version>
+	        </dependency>
 
 
 	</dependencies>
@@ -134,38 +134,34 @@
 			 <!-- This configuration could be used to generate a single JAR containing all the external libraries, 
 			 	however ZeroMQ native libraries must be installed anyway -->
 			  
-		    <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.steffi.Main</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.dstovall</groupId>
-                <artifactId>onejar-maven-plugin</artifactId>
-                <version>1.4.4</version>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <onejarVersion>0.97</onejarVersion>
-                            <attachToBuild>true</attachToBuild>
-                            <classifier>onejar</classifier>
-                        </configuration>
-                        <goals>
-                            <goal>one-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        
-			
-			
-			
+		        <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-jar-plugin</artifactId>
+                                <configuration>
+                                        <archive>
+                                                <manifest>
+                                                        <mainClass>com.steffi.Main</mainClass>
+                                                </manifest>
+                                        </archive>
+                                </configuration>
+                       </plugin>
+                       <plugin>
+                               <groupId>org.dstovall</groupId>
+                               <artifactId>onejar-maven-plugin</artifactId>
+                               <version>1.4.4</version>
+                               <executions>
+                                       <execution>
+                                               <configuration>
+                                                       <onejarVersion>0.97</onejarVersion>
+                                                       <attachToBuild>true</attachToBuild>
+                                                       <classifier>onejar</classifier>
+                                               </configuration>
+                                               <goals>
+                                                       <goal>one-jar</goal>
+                                               </goals>
+                                       </execution>
+                               </executions>
+                        </plugin>	
  			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -175,10 +171,7 @@
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
 							<mainClass>com.steffi.Main</mainClass>
-	
-
 						</manifest>
-	
 					</archive>
 				</configuration>
 			</plugin>

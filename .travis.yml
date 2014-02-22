@@ -1,6 +1,6 @@
 language: java
 before_install:
-install: mvn clean install
+install: ./script/ci/run_build.sh
 jdk:
   - oraclejdk7
   - openjdk7
