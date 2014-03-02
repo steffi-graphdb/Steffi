@@ -1,7 +1,7 @@
 #!/bin/bash
-mkdir /mnt/data/imgraph
-mkdir /mnt/data/imgraph/software
-cd /mnt/data/imgraph/software
+cd ..
+mkdir -p prerequisites/zeromq
+cd prerequisites/zeromq
 wget http://download.zeromq.org/zeromq-3.2.2.tar.gz
 tar xvfz zeromq-3.2.2.tar.gz
 rm zeromq-3.2.2.tar.gz
