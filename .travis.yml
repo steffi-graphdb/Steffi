@@ -3,6 +3,7 @@ before_install:
   - ./msc/install-zeromq.sh
   - ./msc/install-jzmq.sh
 install: ./script/ci/run_build.sh
+script: ./script/ci/run_test.sh
 after_script:
 jdk:
   - oraclejdk7
