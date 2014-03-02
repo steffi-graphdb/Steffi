@@ -6,4 +6,7 @@ jdk:
   - openjdk7
 notifications:
   email:
-    - atsaltas@gmail.com
+    recipients:
+      - atsaltas@gmail.com
+    on_success: always # [always|never|change] default change
+    on_failure: always # [always|never|change] default always
