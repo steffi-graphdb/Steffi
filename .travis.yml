@@ -1,5 +1,6 @@
 language: java
-before_install:
+before_install: 
+  - ./msc/install-zeromq.sh
 install: ./script/ci/run_build.sh
 jdk:
   - oraclejdk7
