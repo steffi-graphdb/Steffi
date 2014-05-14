@@ -13,8 +13,7 @@
 
 	<properties>
 		<version.infinispan>5.2.0.Final</version.infinispan>
-		
-		<jzmq.version>4.0.0-SNAPSHOT</jzmq.version>
+
 		<native.os>${os.name}</native.os>
 	</properties>
 
@@ -29,60 +28,45 @@
 			<artifactId>blueprints-core</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.tinkerpop.rexster</groupId>
 			<artifactId>rexster-core</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-            
+
 		<dependency>
 			<groupId>com.tinkerpop.blueprints</groupId>
 			<artifactId>blueprints-test</artifactId>
 			<version>2.1.0</version>
 		</dependency>
-		
+
     	        <dependency>
 			<groupId>com.typesafe.akka</groupId>
 			<artifactId>akka-actor_2.10</artifactId>
 			<version>2.1.0</version>
 		</dependency>
 
-	
+
 		<dependency>
 			<groupId>org.jboss.jbossts</groupId>
 			<artifactId>jbossjta</artifactId>
 			<version>4.16.4.Final</version>
 		</dependency>
-		
-		<!-- You can use jeromq instead of JZMQ but it will give you less performance 
-		<dependency>
-  			<groupId>org.jeromq</groupId>
-  			<artifactId>jeromq</artifactId>
-  			<version>0.3.0-SNAPSHOT</version>
-		</dependency>
-		-->
-		     
-		<dependency>
-			<groupId>org.zeromq</groupId>
-			<artifactId>jzmq4</artifactId>
-			<version>${jzmq.version}</version>
-		</dependency>  
-		
-		
-		<dependency>
-			<groupId>org.zeromq</groupId>
-			<artifactId>jzmq4-native</artifactId>
-			<version>${jzmq.version}</version>
-		</dependency> 
-		
+
+        <dependency>
+            <groupId>naughtmq</groupId>
+            <artifactId>naughtmq</artifactId>
+            <version>0.0.2</version>
+        </dependency>
+
 		<dependency>
 			<groupId>net.sf.trove4j</groupId>
 			<artifactId>trove4j</artifactId>
 			<version>3.0.3</version>
 		</dependency>
-	
-                <dependency> 
+
+                <dependency>
 	  	        <groupId>org.slf4j</groupId>
 	  	        <artifactId>slf4j-log4j12</artifactId>
 	  	        <version>1.7.2</version>
@@ -90,7 +74,7 @@
 
 
 	</dependencies>
- 
+
 	<build>
 		<plugins>
 			<!-- enforce java 1.6 and maven 2.1.0 -->
@@ -129,11 +113,11 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			
-			
-			 <!-- This configuration could be used to generate a single JAR containing all the external libraries, 
+
+
+			 <!-- This configuration could be used to generate a single JAR containing all the external libraries,
 			 	however ZeroMQ native libraries must be installed anyway -->
-			  
+
 		        <plugin>
                                 <groupId>org.apache.maven.plugins</groupId>
                                 <artifactId>maven-jar-plugin</artifactId>
@@ -161,7 +145,7 @@
                                                </goals>
                                        </execution>
                                </executions>
-                        </plugin>	
+                        </plugin>
  			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -194,7 +178,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
         		<artifactId>maven-surefire-plugin</artifactId>
@@ -204,8 +188,8 @@
       		</plugin>
 		</plugins>
 	</build>
-	
-	
+
+
 	<pluginRepositories>
         <pluginRepository>
             <id>onejar-maven-plugin.googlecode.com</id>
@@ -214,6 +198,11 @@
     </pluginRepositories>
 
 	<repositories>
+        <repository>
+            <id>clojars.org</id>
+            <url>http://clojars.org/repo</url>
+        </repository>
+
 		<repository>
 			<id>JBoss.org Public Repository</id>
 			<releases>
@@ -224,7 +213,7 @@
 			</snapshots>
 			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
 		</repository>
-		
+
 		<repository>
 			<id>typesafe</id>
 			<name>Typesafe Repository</name>
@@ -234,7 +223,7 @@
 
 	<profiles>
 		<profile>
-			<!-- This profile is used to run the sample Application.java file. Remove 
+			<!-- This profile is used to run the sample Application.java file. Remove
 				this in any production usage. -->
 			<id>run</id>
 			<activation>
