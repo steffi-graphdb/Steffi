@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+
+	<!-- Set the viewport width to device width for mobile -->
+	<meta name="viewport" content="width=device-width" />
+
+	<title>STEFFI - Scalable Traversal Engine For Fast In-memory graphDB</title>
+  
+	<!-- Included CSS Files -->
+	<link rel="stylesheet" href="stylesheets/foundation.css">
+	<link rel="stylesheet" href="stylesheets/app.css">
+        
+        <link rel="shortcut icon" href="favicon.ico">
+
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="stylesheets/ie.css">
+	<![endif]-->
+
+
+	<!-- IE Fix for HTML5 Tags -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-43696098-1', 'steffi.io');
+    ga('send', 'pageview');
+
+  </script>
+</head>
+<body>
+
+	<!-- container -->
+	<div class="container">
+
+		<div class="row">
+			<div class="five columns">
+				<img src="images/logo.png" alt="RoQ logo" />
+			</div>			
+			<div class="seven columns">
+				<h2>STEFFI</h2>
+        <h3>Scalable Traversal Engine For Fast In-memory graphDB</h3>
+			</div>
+    </div>
+    <hr class="spacer" />
+		<div class="row">
+			<div class="eight columns">
+        <div class="row">
+					<div class="twelve columns">
+            <dl class="nice contained tabs">
+              <dd><a href="#home" class="active">STEFFI Home</a></dd>
+              <dd><a href="#results">Results</a></dd>
+            </dl>
+
+            <ul class="nice tabs-content contained">
+              <li class="active" id="homeTab">
+                <h3>Welcome to STEFFI</h3>
+                <p class="lead">STEFFI is a distributed graph database fully in-memory and amazingly fast when it comes to querying large datasets.</p>
+		<p>As a scalable graph database, STEFFI's performance can directly be <a href="#results" class="call2tab">compared to Neo4j and Titan</a>. It provides its users with a clear competitive advantage when it comes to complicated traversal operations on large datasets. <strong>Speedups of up to 200</strong> have been observed when comparing STEFFI with its alternatives.</p>
+                <p>More than an alternative to existing solutions, STEFFI opens up new possibilities for high-performance graph storage and manipulation.</p>
+                <h4>Main features</h4>
+                <ul>
+                  <li>in-memory storage for a fast random access</li>
+                  <li>distributed parallel computing for high-speed graph queries</li>
+                  <li>graph traversal engine for graph processing</li>
+                  <li>scalability for a growing data</li>
+                  <li>implementing the <a href="https://github.com/tinkerpop/blueprints/wiki">Blueprints API from tinkerpop</a> for an enchanced accessibility</li>
+                </ul>
+                <h4>Recommended for</h4>
+                <ul>
+                  <li>fast recommendation engines (e-commerce, telecommunications, finance, ...)</li>
+                  <li>large biological networks analysis (biopharma, healthcare, ... ) </li>
+                  <li>security networks management & real-time fraud detection (bank, public institutions, ...)</li>
+                  <li>complex network & data center management (telecommunications, e-commerce, ...) </li>
+                  <li>and much more!</li>
+                </ul>
+                <h4>Availability</h4>
+                </p>STEFFI is currently in its incubation phase within <a href="http://euranova.eu">EURA NOVA</a>. Once the code is mature and stable enough, STEFFI will be provided via this website under the Apache Licence Version 2. If you would like to know more about this project evolution, do not hesitate to <a href="#" data-reveal-id="MLSub">subscribe to our mailing list</a> or <a href="http://euranova.eu/contact">contact EURA NOVA</a>. <p>
+              </li>
+              <li id="resultsTab">
+              <h3>Proven performances</h3>
+              <p class="lead">STEFFI has been measured against its competition. Here are the results.</p>
+              <p>The experiments were performed using <strong>4 graph datasets</strong>:</p>
+              <table class="twelve centered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Size metrics</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>soc-Epinions</td>
+                    <td>A directed graph representing<br />the who-trust-whom online social<br />network of a general consumer<br />review site <a href="http://www.epinions.com/">Epinions.com</a></td>
+                    <td><ul class="square"><li>75K vertices</li><li>508K edges</li></td>
+                  </tr>
+                  <tr>
+                    <td>youTube</td>
+                    <td>An undirected graph representing<br />the Youtube social network</td>
+                    <td><ul class="square"><li>1.1M vertices</li><li>3M edges</li></td>
+                  </tr>
+                  <tr>
+                    <td>ukgraph</td>
+                    <td>A directed graph representing a<br />segment of a snapshot of the web<br />network in UK</td>
+                    <td><ul class="square"><li>4.5M vertices</li><li>66M edges</li></td>
+                  </tr>
+                  <tr>
+                    <td>soc-LiveJournal</td>
+                    <td>A directed graph representing<br />LiveJournal</td>
+                    <td><ul class="square"><li>4.8M vertices</li><li>69M edges</li></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>Next figure shows the results (log-scale) of the traversal tests performed on the 4 datasets: the average execution time of 200 traversals at maximum 3 hops between two vertices having at least one path. We compare our results achieved on 5 and 10 machines to <a href="http://www.neo4j.org/">Neo4j</a> and <a href="http://thinkaurelius.github.io/titan/">Titan</a> on 5 and 10 machines.</p>
+              <a class="th" href="images/Results.png"><img src="images/Results.png"></a>
+              <h4>Neo4J vs. STEFFI</h4>
+              <ul class="square">
+                <li>For the larger datasets, STEFFI gets better results than Neo4J (up to <strong>x200 faster</strong> for ukgraph).</li>
+                <li>Neo4J's performance is more negatively affected by the large graphs than STEFFI's performance. Indeed, if the graph is larger, Neo4J will be able to load in the cache only a small portion of the graph so it will have to read from the disk more frequently.</li>
+		<li>Neo4J is slower for all datasets sizes except the smallest one (75K vertices) where performances are similar.</li>
+              </ul>
+              <h4>Titan vs. STEFFI</h4>
+              <ul class="square">
+                <li>Thanks to its distributed parallel computing,  STEFFI performs better (up to <strong>x150 faster</strong> for soc-LiveJournal) in all the traversal configurations for all the datasets.</li>
+                <li>As Titan traversals run on a single machine there is a considerable amount of network communication to obtain graph data and the computation power of Titan is limited to the capacity of a single machine.</li>
+                <li>Another factor that makes STEFFI perform better is the faster random access provided by STEFFI's in-memory storage. Although Cassandra provides a caching functionality, this cache cannot store all data from a large graph so many disk reads will be required.</li>
+              </ul>
+              </li>
+            </ul>
+					</div>
+				</div>
+			</div>
+      <div class="four columns">
+        <div class="row">
+          <div class="panel">
+            <h4>Partner</h4>
+            <p>Build with the support of:</p>
+            <ul>
+            <li><a href="http://euranova.eu"><img src="images/logo-euranova.png" alt="EURA NOVA" /></a></li>
+            </ul>
+           </div>
+        </div>
+      </div>
+      </div>
+      <div class="row ">
+        <div class="twelve columns">
+          <hr />
+        </div>
+      </div>
+      <div class="row footer">
+        <div class="four columns">
+            <h5>About</h5>
+            <p>STEFFI is an Open Source project backed up by <a href="http://euranova.eu">EURA NOVA</a>.</p>
+        </div>
+        <div class="four columns">
+            <h5>Licence</h5>
+            <p>STEFFI will soon be released under the Apache Licence version 2. Stay tuned!</p>
+        </div>
+        <div class="four columns">
+        <h5>Stay in touch with STEFFI</h5>
+            <ul class="social">
+              <li><a href="https://groups.google.com/d/forum/steffi-graphdb" title="STEFFI mailing list" id="googlegroup">STEFFI mailing list</a></li>
+            </ul>
+        </div>
+      </div>
+		</div>
+    
+    <div id="MLSub" class="reveal-modal">
+      <h2>Want to join the discussion?</h2>
+      <p class="lead">Two possibilities:</p>
+      <p><a href="https://groups.google.com/d/forum/steffi-graphdb" class="nice radius large white button">Go to the google group page</a></p>
+      <p>or</p>
+      <form class="nice" action="http://groups.google.com/group/steffi-graphdb/boxsubscribe" target="_blank">
+        <input type="text" name="email" placeholder="Enter Your Email" class="small input-text">
+        <input type="submit" name="sub" value="Subscribe directly" class="nice radius large white button">
+      </form>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+	<!-- Included JS Files -->
+	<script src="javascripts/foundation.js"></script>
+	<script src="javascripts/app.js"></script>
+
+</body>
+</html>
+
+

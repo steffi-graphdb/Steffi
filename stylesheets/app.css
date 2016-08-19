@@ -1,0 +1,69 @@
+/* Foundation v2.1.4 http://foundation.zurb.com */
+/* Artfully masterminded by ZURB  */
+
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Page Name 1
+:: Page Name 2
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+
+.container{
+  margin-top: 1em;
+}
+
+/* Nice tabs are pink! */
+.nice.tabs dd a.active { border-top: 3px solid #e5007e; }
+
+/* Nice pink buttons */
+.pink.button			{ background-color: #e75aa6}
+.nice.pink.button		{ border: 1px solid #e5007e;  }
+.pink.button:hover, .pink.button:focus		{ background-color: #e5007e; 	}
+
+hr.spacer{
+  visibility: hidden;
+}
+/* Titles */
+h4 { font-weight: normal; font-size: 1.2em; margin-bottom: 6px; }
+h5 { font-weight: bold; font-size: 1em }
+
+/* ul in content */
+ul.tabs-content ul{
+  list-style-type: square;
+  margin-left: 1em;
+}
+/* Social icons */
+ul.social li{
+}
+ul.social li a{
+  display: block;
+  float: left;
+  width: 48px;
+  height: 48px;
+  text-indent: -9999px;
+  margin-bottom: 1em;
+  margin-right: 1em;
+}
+ul.social li a#googleplus{
+  background: url(../images/googleplus.png) top left no-repeat;
+}
+ul.social li a#googlegroup{
+  background: url(../images/googlegroup.png) top left no-repeat;
+}
+ul.social li a#github{
+  background: url(../images/github.png) top left no-repeat;
+}
+
+
+
+/* -----------------------------------------
+   Page Name 2
+----------------------------------------- */
+
+
